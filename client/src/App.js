@@ -7,12 +7,13 @@ function App() {
 
   const [movieName, setMovieName] = useState("")
   const [movieReview, setMovieReview] = useState("")
+  const [movieReviewList, setMovieList] = useState([])
 
- /*  const useEffect(() => {
+  useEffect(() => {
     Axios.get("http://localhost:3001/api/get").then((response) => {
-      console.log(response.data)
+      setMovieList(response.data)
     })
-  }, []) */
+  }, [])
 
 
   const submitReview = () => {
@@ -30,12 +31,16 @@ function App() {
       <h1>CRUD APPLCATION</h1>
 
       <div className="form">
-        <label>Movie Name:</label>
+        <label>Movie Name: {movieName}</label>
         <input typeof="text" name="movieName" onChange={ (e) => { setMovieName(e.target.value) } } />
-        <label>Review:</label>
-        <input typeof="text" name="review"  onChange={ (e) => { setMovieReview(e.target.value) } }/>
+        <label>Review:{movieReview}</label>
+        <input typeof="text" name="movieReview"  onChange={ (e) => { setMovieReview(e.target.value) } }/>
 
-        <button onClick={submitReview()} >Submit</button>
+        <button onClick={submitReview()}>Submit</button>
+
+        {movieReviewList.map((val) => {
+          return (<h1>MovieName: {val.movieName} | MovieReview: {val.movieReview}</h1>)
+        })}
       </div>
       
     </div>
